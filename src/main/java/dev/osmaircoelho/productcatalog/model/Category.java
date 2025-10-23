@@ -1,4 +1,4 @@
-package dev.osmaircoelho.model;
+package dev.osmaircoelho.productcatalog.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
