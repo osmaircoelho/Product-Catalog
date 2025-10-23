@@ -3,6 +3,7 @@ package dev.osmaircoelho.productcatalog.service;
 import dev.osmaircoelho.productcatalog.dto.CategoryDTO;
 import dev.osmaircoelho.productcatalog.model.Category;
 import dev.osmaircoelho.productcatalog.repository.CategoryRepository;
+import dev.osmaircoelho.productcatalog.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,8 @@ public class CategoryService {
     public CategoryRepository repository;
 
     @Transactional(readOnly = true) //evita que faz locking no banco de dados
-    public List<CategoryDTO> findAll(){
-        List<Category> list =  repository.findAll();
+    public List<CategoryDTO> findAll() {
+        List<Category> list = repository.findAll();
 
         //x -> new CategoryDTO(x)
         //transforma cada elemento da lista em um CategoryDTO
@@ -34,9 +35,11 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-     public CategoryDTO findById(Long id){
+    public CategoryDTO findById(Long id) {
         Optional<Category> obj = repository.findById(id);
-        Category entity = obj.get();
+        Category entity = obj.orElseThrow(
+                () -> new EntityNotFoundException("Entity not found")
+        );
         return new CategoryDTO(entity);
     }
 
