@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,4 +32,12 @@ public class CategoryService {
         //CategoryDTO::new é uma referência de método que chama o construtor CategoryDTO(Category entity)
         return list.stream().map(CategoryDTO::new).collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+     public CategoryDTO findById(Long id){
+        Optional<Category> obj = repository.findById(id);
+        Category entity = obj.get();
+        return new CategoryDTO(entity);
+    }
+
 }
