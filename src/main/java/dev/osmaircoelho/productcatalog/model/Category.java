@@ -1,9 +1,6 @@
 package dev.osmaircoelho.productcatalog.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
@@ -16,6 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true) //para equals e hashCode, incluindo apenas o campo id.
 @NoArgsConstructor //construtor sem argumentos
 @AllArgsConstructor //construtor com todos os argumentos
+@Table(name = "tb_category")
 public class Category implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
