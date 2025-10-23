@@ -1,5 +1,6 @@
 package dev.osmaircoelho.productcatalog.controller;
 
+import dev.osmaircoelho.productcatalog.dto.CategoryDTO;
 import dev.osmaircoelho.productcatalog.model.Category;
 import dev.osmaircoelho.productcatalog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll(){
+    public ResponseEntity<List<CategoryDTO>> findAll(){
 
-        List<Category> list = service.findAll();
+        List<CategoryDTO> list = service.findAll();
+
         return ResponseEntity.ok().body(list);
+
     }
 }
