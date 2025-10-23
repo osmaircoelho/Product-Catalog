@@ -4,6 +4,7 @@ import dev.osmaircoelho.productcatalog.model.Category;
 import dev.osmaircoelho.productcatalog.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class CategoryService {
     @Autowired
     public CategoryRepository repository;
 
+    @Transactional(readOnly = true) //evita que faz locking no banco de dados
     public List<Category> findAll(){
         return repository.findAll();
     }
