@@ -33,14 +33,16 @@ public class CategoryController {
     //code HTTP 201 recurso criado
     @PostMapping
     public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
+        //code HTTP 201 recurso criado
         dto = service.insert(dto);
+        //retorna o código 201 com o cabeçalho Location com a URL do recurso criado
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(dto.getId())
                 .toUri();
-
-        return ResponseEntity.ok().body(dto);
+        //retorna o código 201 com o corpo do recurso criado
+        return ResponseEntity.created(uri).body(dto);
     }
 
 }

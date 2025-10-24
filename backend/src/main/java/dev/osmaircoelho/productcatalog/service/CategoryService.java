@@ -45,9 +45,13 @@ public class CategoryService {
 
     @Transactional
     public CategoryDTO insert(CategoryDTO dto) {
+        //converter o dto em uma entidade
         Category entity = new Category();
+        //setar o nome da entidade
         entity.setName(dto.getName());
+        //salvar a entidade no banco de dados
         entity = repository.save(entity);
+        //converter a entidade em um dto
         return new CategoryDTO(entity);
     }
 }
