@@ -3,7 +3,8 @@ package dev.osmaircoelho.productcatalog.service;
 import dev.osmaircoelho.productcatalog.dto.CategoryDTO;
 import dev.osmaircoelho.productcatalog.model.Category;
 import dev.osmaircoelho.productcatalog.repository.CategoryRepository;
-import dev.osmaircoelho.productcatalog.service.exceptions.EntityNotFoundException;
+import dev.osmaircoelho.productcatalog.service.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,7 @@ public class CategoryService {
     public CategoryDTO findById(Long id) {
         Optional<Category> obj = repository.findById(id);
         Category entity = obj.orElseThrow(
-                () -> new EntityNotFoundException("Entity not found")
+                () -> new ResourceNotFoundException("Entity not found")
         );
         return new CategoryDTO(entity);
     }
@@ -53,5 +54,18 @@ public class CategoryService {
         entity = repository.save(entity);
         //converter a entidade em um dto
         return new CategoryDTO(entity);
+    }
+
+    @Transactional
+    public CategoryDTO update(Long id, CategoryDTO dto) {
+        try {
+        Category entity = repository.getReferenceById(id);
+        entity.setName(dto.getName());
+        entity = repository.save(entity);
+        return  new CategoryDTO(entity);
+        }
+        catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException("Id not found "+ id);
+        }
     }
 }

@@ -3,6 +3,7 @@ package dev.osmaircoelho.productcatalog.controller;
 import dev.osmaircoelho.productcatalog.dto.CategoryDTO;
 import dev.osmaircoelho.productcatalog.model.Category;
 import dev.osmaircoelho.productcatalog.service.CategoryService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,12 @@ public class CategoryController {
         //retorna o código 201 com o corpo do recurso criado
         return ResponseEntity.created(uri).body(dto);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto){
+        //salva o dto no banco de dados
+        dto = service.update(id, dto);
+        return ResponseEntity.ok().body(dto);
+    }
+
 
 }
