@@ -1,7 +1,7 @@
 package dev.osmaircoelho.productcatalog.controller.exceptions;
 
 
-import dev.osmaircoelho.productcatalog.service.exceptions.EntityNotFoundException;
+import dev.osmaircoelho.productcatalog.service.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,9 @@ import java.time.Instant;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFound(
-            EntityNotFoundException e,
+            ResourceNotFoundException e,
             HttpServletRequest request
     ) {
         StandardError err = new StandardError();
