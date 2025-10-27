@@ -45,11 +45,18 @@ public class CategoryController {
         //retorna o código 201 com o corpo do recurso criado
         return ResponseEntity.created(uri).body(dto);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto){
+    public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
         //salva o dto no banco de dados
         dto = service.update(id, dto);
         return ResponseEntity.ok().body(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
