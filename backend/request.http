@@ -1,5 +1,5 @@
 ### Obter todas as categorias
-GET {{baseUrl}}/categories
+GET {{baseUrl}}/categories?page=0&linesPerPage=5&direction=ASC&orderBy=name
 
 ### Category by id
 GET {{baseUrl}}/categories/3

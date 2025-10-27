@@ -6,9 +6,10 @@ import dev.osmaircoelho.productcatalog.repository.CategoryRepository;
 import dev.osmaircoelho.productcatalog.service.exceptions.DataBaseException;
 import dev.osmaircoelho.productcatalog.service.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +24,8 @@ public class CategoryService {
     public CategoryRepository repository;
 
     @Transactional(readOnly = true) //evita que faz locking no banco de dados
-    public List<CategoryDTO> findAll() {
-        List<Category> list = repository.findAll();
+    public Page<CategoryDTO> findAllPaged(PageRequest pageRequest) {
+        Page<Category> list = repository.findAll(pageRequest);
 
         //x -> new CategoryDTO(x)
         //transforma cada elemento da lista em um CategoryDTO
@@ -35,7 +36,7 @@ public class CategoryService {
         //collect() é um método do stream que coleta os elementos do stream em um objeto
         //neste caso, coleta os elementos do stream em uma lista
         //CategoryDTO::new é uma referência de método que chama o construtor CategoryDTO(Category entity)
-        return list.stream().map(CategoryDTO::new).collect(Collectors.toList());
+        return list.map(CategoryDTO::new);
     }
 
     @Transactional(readOnly = true)
