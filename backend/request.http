@@ -1,0 +1,26 @@
+### Obter todas as categorias
+GET {{baseUrl}}/categories
+
+### Category by id
+GET {{baseUrl}}/categories/3
+Content-Type: application/json
+
+### Deletar categoria
+DELETE {{baseUrl}}/categories/7
+Content-Type: application/json
+
+### Criar nova categoria
+POST {{baseUrl}}/categories
+Content-Type: application/json
+
+{
+  "name" : "Categoria Nova"
+}
+
+### Atualizar categoria
+PUT {{baseUrl}}/categories/6
+Content-Type: application/json
+
+{
+    "name" : "Categoria Atualizada"
+}

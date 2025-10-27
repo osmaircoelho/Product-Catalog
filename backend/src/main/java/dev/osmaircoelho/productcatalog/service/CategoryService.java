@@ -98,19 +98,4 @@ public class CategoryService {
         }
 
     }
-
-
-    /*public void delete(Long id) {
-    if (!repository.existsById(id)) {
-        throw new ResourceNotFoundException("Id not found " + id);
-    }
-    try {
-        repository.deleteById(id);
-    } catch (DataIntegrityViolationException e) {
-        throw new DataBaseException("Integrity violation");
-    }
-}
-*/
-
-
 }
