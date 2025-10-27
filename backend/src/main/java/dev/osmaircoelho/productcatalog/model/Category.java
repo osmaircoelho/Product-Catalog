@@ -26,10 +26,10 @@ public class Category implements Serializable {
 
     private String name;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @Column(columnDefinition = "DATETIME")
     private Instant createdAt;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @Column(columnDefinition = "DATETIME")
     private Instant updatedAt;
 
     @PrePersist
