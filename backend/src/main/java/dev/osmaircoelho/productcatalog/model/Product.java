@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,7 +53,6 @@ public class Product implements Serializable {
 
     //Para categories, nao queremos o setter, entao usamos:
     @Setter(AccessLevel.NONE)
-
     @ManyToMany
     @JoinTable(
             name = "tb_product_category",
@@ -62,6 +60,7 @@ public class Product implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "category_id") // referencia a category
     )
     //conjunto SET<> nao aceita repeticao
+    // o mesmo produto nao pode ter a mesma categoria mais de uma vez
     Set<Category> categories = new HashSet<>();
 
 }
