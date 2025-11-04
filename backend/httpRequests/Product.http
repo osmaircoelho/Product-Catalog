@@ -1,0 +1,26 @@
+### get all produtos
+GET {{baseUrl}}/products?page=0&linesPerPage=5&direction=ASC&orderBy=name
+
+### Product by id
+GET {{baseUrl}}/Products/3
+Content-Type: application/json
+
+### Delet Product
+DELETE {{baseUrl}}/Products/7
+Content-Type: application/json
+
+### new Products
+POST {{baseUrl}}/Products
+Content-Type: application/json
+
+{
+  "name" : "New Product"
+}
+
+### Update Product
+PUT {{baseUrl}}/Products/6
+Content-Type: application/json
+
+{
+    "name" : "Products Update"
+}
