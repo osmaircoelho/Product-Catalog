@@ -2,11 +2,11 @@
 GET {{baseUrl}}/products?page=0&linesPerPage=5&direction=ASC&orderBy=name
 
 ### Product by id
-GET {{baseUrl}}/products/2
+GET {{baseUrl}}/products/1
 Content-Type: application/json
 
 ### Delet Product
-DELETE {{baseUrl}}/products/7
+DELETE {{baseUrl}}/products/26
 Content-Type: application/json
 
 ### new Products
@@ -14,13 +14,39 @@ POST {{baseUrl}}/products
 Content-Type: application/json
 
 {
-  "name" : "New Product"
+  "name": "PS5",
+  "description": "The new generation of PlayStation",
+  "price": 4999.99,
+  "img_url": "https://example.com/ps5.jpg",
+  "date": "2024-06-15T10:00:00Z",
+  "created_at": "2024-06-01T12:00:00Z",
+  "categories": [
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    }
+  ]
 }
 
 ### Update Product
-PUT {{baseUrl}}/products/6
+PUT {{baseUrl}}/products/1
 Content-Type: application/json
 
 {
-    "name" : "Products Update"
+    "name" : "Updated Product Name",
+    "description": "Updated description of the product",
+    "price": 2999.99,
+    "img_url": "https://example.com/updated_product.jpg",
+    "date": "2024-07-01T10:00:00Z",
+    "created_at": "2024-06-10T12:00:00Z",
+    "categories": [
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      }
+    ]
 }

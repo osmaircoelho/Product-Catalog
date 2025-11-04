@@ -1,7 +1,10 @@
 package dev.osmaircoelho.productcatalog.service;
 
+import dev.osmaircoelho.productcatalog.dto.CategoryDTO;
 import dev.osmaircoelho.productcatalog.dto.ProductDTO;
+import dev.osmaircoelho.productcatalog.model.Category;
 import dev.osmaircoelho.productcatalog.model.Product;
+import dev.osmaircoelho.productcatalog.repository.CategoryRepository;
 import dev.osmaircoelho.productcatalog.repository.ProductRepository;
 import dev.osmaircoelho.productcatalog.service.exceptions.DataBaseException;
 import dev.osmaircoelho.productcatalog.service.exceptions.ResourceNotFoundException;
@@ -20,6 +23,9 @@ public class ProductService {
 
     @Autowired
     public ProductRepository repository;
+
+    @Autowired
+    public CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true) //evita que faz locking no banco de dados
     public Page<ProductDTO> findAllPaged(PageRequest pageRequest) {
@@ -51,6 +57,9 @@ public class ProductService {
         Product entity = new Product();
         //setar o nome da entidade
         //entity.setName(dto.getName());
+
+        copyDtoToEntity(dto, entity);
+
         //salvar a entidade no banco de dados
         entity = repository.save(entity);
         //converter a entidade em um dto
@@ -62,11 +71,30 @@ public class ProductService {
         try {
             Product entity = repository.getReferenceById(id);
             //entity.setName(dto.getName());
+
+            copyDtoToEntity(dto, entity);
+
             entity = repository.save(entity);
             return new ProductDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + id);
         }
+    }
+
+    private void copyDtoToEntity(ProductDTO dto, Product entity){
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setPrice(dto.getPrice());
+        entity.setImgUrl(dto.getImageUrl());
+        entity.setDate(dto.getDate().atStartOfDay());
+
+        entity.getCategories().clear();
+
+        for (CategoryDTO catDto : dto.getCategories()){
+            Category category = categoryRepository.getOne(catDto.getId());
+            entity.getCategories().add(category);
+        }
+
     }
 
     // nao colocar o transactional
