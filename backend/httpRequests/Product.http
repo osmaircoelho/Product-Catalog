@@ -2,15 +2,15 @@
 GET {{baseUrl}}/products?page=0&linesPerPage=5&direction=ASC&orderBy=name
 
 ### Product by id
-GET {{baseUrl}}/Products/3
+GET {{baseUrl}}/products/2
 Content-Type: application/json
 
 ### Delet Product
-DELETE {{baseUrl}}/Products/7
+DELETE {{baseUrl}}/products/7
 Content-Type: application/json
 
 ### new Products
-POST {{baseUrl}}/Products
+POST {{baseUrl}}/products
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ### Update Product
-PUT {{baseUrl}}/Products/6
+PUT {{baseUrl}}/products/6
 Content-Type: application/json
 
 {

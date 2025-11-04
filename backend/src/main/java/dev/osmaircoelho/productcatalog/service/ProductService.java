@@ -41,7 +41,8 @@ public class ProductService {
     public ProductDTO findById(Long id) {
         Optional<Product> obj = repository.findById(id);
         Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-        return new ProductDTO(entity);
+        //mostra as categorias junto com o produto
+        return new ProductDTO(entity, entity.getCategories());
     }
 
     @Transactional
